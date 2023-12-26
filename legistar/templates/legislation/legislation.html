@@ -1,0 +1,67 @@
+<html>
+
+<head>
+    <title>{{legislation.legislation_type}} {{legislation.file_number}}</title>
+    <link rel="stylesheet" href="https://unpkg.com/xp.css">
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+
+</head>
+
+<body>
+    <div class="window">
+        <div class="title-bar">
+            <div class="title-bar-text">{{legislation.legislation_type}} {{legislation.file_number}}</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="inner">
+                <h2>{{legislation.title}}</h2>
+                {% if legislation.sponsors.all %}
+                <fieldset>
+                    <legend>Sponsors</legend>
+                    <ul>
+                        {% for sponsor in legislation.sponsors.all %}
+                        <li><a href="/people/{{sponsor.id}}/">{{sponsor.name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </fieldset>
+                {% endif %}
+                <fieldset>
+                    <legend>Timeline</legend>
+                    {% for action in legislation.actions.all %}
+                    <div>
+                        <div>{{action.date}} - {{action.action}}
+                            {% if action.action_by %}{% if action.action %} by {% endif %}{{action.action_by}}
+                            {% endif %}
+                        </div>
+                        {% if action.votes.all %}
+                        <div>
+                            <ul>
+                                {% for vote in action.votes.all %}
+                                <li>
+                                    <a href="/people/{{vote.person.id}}/">{{vote.person.name}}</a>:
+                                    {{vote.vote}}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </fieldset>
+                <fieldset>
+                    <legend>Full Text</legend>
+                    <blockquote>
+                        {{legislation.text|linebreaks}}
+                    </blockquote>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

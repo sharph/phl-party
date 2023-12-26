@@ -1,0 +1,18 @@
+<div class="legislationcard legislationstatus-{{item.status|cut:" "}}">
+    <fieldset>
+        <legend>
+            <a href="/legislation/{{item.file_number}}">{{item.file_number}}</a> {{item.legislation_type}} <span
+                class="status legislationstatus-{{item.status|cut:" "}}">{{item.status}}</span>
+        </legend>
+        <div class="title">
+            {{item.title}}
+        </div>
+        <div class="sponsors">
+            {% for sponsor in item.sponsors.all %}
+            <div class="sponsor">
+                <a href="/people/{{sponsor.id}}/">{{sponsor.name}}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </fieldset>
+</div>

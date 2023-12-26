@@ -1,0 +1,62 @@
+body {
+    /* font-family: sans-serif; */
+    padding: 300px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background: url(/static/gritty.jpeg) repeat;
+}
+
+.window {
+    font-size: 12pt;
+}
+
+.inner {
+    margin: 2em;
+}
+
+h2 {
+    font-size: 18pt;
+}
+
+h3 {
+    font-size: 14pt;
+}
+
+.actioncard {
+    margin: 1em;
+}
+
+.legislationcard {
+    margin: 0.5em;
+    padding: 0.5em;
+    width: 400px;
+}
+
+.legislationcard.legislationstatus-ADOPTED fieldset,
+.legislationcard.legislationstatus-ENACTED fieldset {
+    background: #ccffcc;
+}
+
+.legislationcard .status {
+    font-style: italic;
+}
+
+.legislationcard .title {
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+.legislationcard .sponsors {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.legislationcard .sponsors .sponsor {
+    font-size: 8pt;
+    margin-right: 1em;
+}
+
+.cardcontainer {
+    display: flex;
+    flex-wrap: wrap;
+}

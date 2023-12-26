@@ -1,0 +1,114 @@
+<html>
+
+<head>
+    <title>Philadelphia City Council</title>
+    <link rel="stylesheet" href="https://unpkg.com/xp.css">
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+
+</head>
+
+<body>
+    <div class="window">
+        <div class="title-bar">
+            <div class="title-bar-text">Philadelphia City Council</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="inner">
+                <section class="tabs">
+                    <menu role="tablist" aria-label="Sample Tabs">
+                        <button role="tab" aria-selected="true" aria-controls="tab-A">Recently Enacted</button>
+                        <button role="tab" aria-controls="tab-B">Recently Introduced</button>
+                        <button role="tab" aria-controls="tab-C">Recent Actions</button>
+                    </menu>
+                    <!-- the tab content -->
+                    <article role="tabpanel" id="tab-A">
+                        <h2>Recently passed (enacted or adopted)</h2>
+                        {% for date, legislation_list in active %}
+                        <h3>{{date}}</h3>
+                        <div class="cardcontainer">
+                            {% for legislation_item in legislation_list %}
+                            {% include "./legislation_card.html" with item=legislation_item %}
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    </article>
+                    <article role="tabpanel" hidden id="tab-B">
+                        <h2>Recent Legislation</h2>
+                        {% for date, legislation_list in legislation %}
+                        <h3>{{date}}</h3>
+                        <div class="cardcontainer">
+                            {% for legislation_item in legislation_list %}
+                            {% include "./legislation_card.html" with item=legislation_item %}
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    </article>
+                    <article role="tabpanel" hidden id="tab-C">
+                        <h2>Recent Actions</h2>
+                        {% for date, action_list in actions %}
+                        <h3>{{date}}</h3>
+                        {% for action in action_list %}
+                        <div class="actioncard">
+                            <div><a
+                                    href="/legislation/{{action.legislation.file_number}}">{{action.legislation.title}}</a>
+                            </div>
+                            <div>
+                                <span>{{action.action}}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endfor %}
+                        </ul>
+                    </article>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        const tabs = document.querySelectorAll("menu[role=tablist]");
+
+        for (let i = 0; i < tabs.length; i++) {
+            const tab = tabs[i];
+
+            const tabButtons = tab.querySelectorAll("menu[role=tablist] > button");
+
+            tabButtons.forEach((btn) =>
+                btn.addEventListener("click", (e) => {
+                    e.preventDefault();
+
+                    tabButtons.forEach((button) => {
+                        if (
+                            button.getAttribute("aria-controls") ===
+                            e.target.getAttribute("aria-controls")
+                        ) {
+                            button.setAttribute("aria-selected", true);
+                            openTab(e, tab);
+                        } else {
+                            button.setAttribute("aria-selected", false);
+                        }
+                    });
+                })
+            );
+        }
+
+        function openTab(event, tab) {
+            const articles = tab.parentNode.querySelectorAll('[role="tabpanel"]');
+            articles.forEach((p) => {
+                p.setAttribute("hidden", true);
+            });
+            const article = tab.parentNode.querySelector(
+                `[role="tabpanel"]#${event.target.getAttribute("aria-controls")}`
+            );
+            article.removeAttribute("hidden");
+        }
+
+    </script>
+</body>
+
+</html>

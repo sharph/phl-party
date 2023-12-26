@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <title>{{person.name}}</title>
+    <link rel="stylesheet" href="https://unpkg.com/xp.css">
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+
+</head>
+
+<body>
+    <div class="window">
+        <div class="title-bar">
+            <div class="title-bar-text">{{person.name}}</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="inner">
+
+                <h1>{{person.name}}</h1>
+                <h2>Recent Sponsored Legislation</h2>
+                <div class="cardcontainer">
+                    {% for legislation_item in legislation %}
+                    {% include "./legislation_card.html" with item=legislation_item %}
+                    {% endfor %}
+                </div>
+                <h2>Recent Votes</h2>
+                <table>
+                    {% for vote in votes %}
+                    <tr>
+                        <td>{{vote.action.date}}</td>
+                        <td>{{vote.vote}}</td>
+                        <td>{{vote.action.legislation.title}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
