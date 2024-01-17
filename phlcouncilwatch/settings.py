@@ -86,14 +86,14 @@ DATABASES = (
     {
         "postgres": {
             "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.getenv("DJANGO_DATABASE_NAME", "phlcouncilwatch"),
-            "USER": os.getenv("DJANGO_DATABASE_USER", "phlcouncilwatch"),
+            "NAME": os.getenv("DJANGO_DB_NAME", "phlcouncilwatch"),
+            "USER": os.getenv("DJANGO_DB_USER", "phlcouncilwatch"),
             "PASSWORD": os.getenv("DJANGO_DATABASE_PASSWORD", "phlcouncilwatch"),
-            "HOST": os.getenv("DJANGO_DATABASE_HOST", "localhost"),
-            "PORT": os.getenv("DJANGO_DATABASE_PORT", "5432"),
+            "HOST": os.getenv("DJANGO_DB_HOST", "localhost"),
+            "PORT": os.getenv("DJANGO_DB_PORT", "5432"),
         }
     }
-    if os.getenv("DJANGO_DATABASE_HOST")
+    if os.getenv("DJANGO_DB_HOST")
     else {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
