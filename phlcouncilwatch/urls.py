@@ -20,6 +20,7 @@ from legistar.views import legislation, person, index
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path("ht/", include("health_check.urls")),
     path("admin/", admin.site.urls),
     path("legislation/<str:file_number>/", legislation),
     path("people/<int:id_>/", person),
