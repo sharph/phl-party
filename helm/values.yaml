@@ -1,3 +1,6 @@
 image:
   tag: latest
+updater:
+  image:
+    tag: latest
 domain: localhost
