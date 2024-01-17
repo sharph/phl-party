@@ -3,4 +3,4 @@ image:
 updater:
   image:
     tag: latest
-domain: localhost
+domain: phl.party

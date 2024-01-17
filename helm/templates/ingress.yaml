@@ -1,0 +1,32 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: phlparty
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`{{ .Values.domain }}`)
+    services:
+    - name: phlparty
+      port: 8000
+  tls:
+    secretName: phlparty-cert
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: phlparty-redirect
+spec:
+  entryPoints:
+  - web
+  routes:
+  - kind: Rule
+    match: Host(`{{ .Values.domain }}`)
+    middlewares:
+    - name: https-redirect
+      namespace: traefik
+    services:
+    - kind: TraefikService
+      name: noop@internal
