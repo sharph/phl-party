@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from django.conf import settings
 from legistar.models import Legislation, Person, ActionVote, LegislationAction
 
 
@@ -56,3 +57,7 @@ def index(request):
         "actions": group_by(actions, lambda x: x.date),
     }
     return HttpResponse(template.render(context, request))
+
+
+def githash(request):
+    return HttpResponse(settings.GIT_HASH, content_type="text/plain")

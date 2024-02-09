@@ -1,0 +1,12 @@
+name: Submit Commit Hashes to Milepost
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: |
+          curl --fail-with-body -X POST --data shas=$(git rev-list --topo-order -n 20 HEAD | sed -z 's/\n/\-/g') \
+            https://app.milepost.tools/commit-submission/${{ secrets.MILEPOST_SUBMISSION_KEY }}

@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
-from legistar.views import legislation, person, index
+from legistar.views import legislation, person, index, githash
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -25,4 +25,5 @@ urlpatterns = [
     path("legislation/<str:file_number>/", legislation),
     path("people/<int:id_>/", person),
     path("", index),
+    path("githash/", githash),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
