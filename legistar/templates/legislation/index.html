@@ -54,11 +54,12 @@
                         <h3>{{date}}</h3>
                         {% for action in action_list %}
                         <div class="actioncard">
-                            <div><a
-                                    href="/legislation/{{action.legislation.file_number}}">{{action.legislation.title}}</a>
-                            </div>
                             <div>
-                                <span>{{action.action}}</span>
+                                <b>{{ action.action_by }}</b>:
+                                <a
+                                    href="/legislation/{{action.legislation.file_number}}">{{action.legislation.title}}</a>
+                                <br>
+                                <b>{{ action.action_text}}</b>
                             </div>
                         </div>
                         {% endfor %}

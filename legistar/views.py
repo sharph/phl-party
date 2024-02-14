@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from django.conf import settings
+from django.utils import timezone
 from legistar.models import Legislation, Person, ActionVote, LegislationAction
 
 
@@ -50,6 +51,8 @@ def index(request):
     ).order_by("-created")[:20]
     actions = LegislationAction.objects.exclude(
         legislation__legislation_type="COMMUNICATION"
+    ).exclude(
+        date__gte=timezone.now()
     ).order_by("-date")
     context = {
         "active": group_by(legislation_active, lambda x: x.final_action),
