@@ -23,7 +23,7 @@ urlpatterns = [
     path("ht/", include("health_check.urls")),
     path("admin/", admin.site.urls),
     path("legislation/<str:file_number>/", legislation),
-    path("people/<int:id_>/", person),
+    path("people/<str:slug>/", person),
     path("", index),
     path("githash/", githash),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

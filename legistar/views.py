@@ -25,9 +25,9 @@ def legislation(request, file_number):
     return HttpResponse(template.render(context, request))
 
 
-def person(request, id_):
+def person(request, slug):
     template = loader.get_template("legislation/person.html")
-    person = Person.objects.get(id=id_)
+    person = Person.objects.get(slug=slug)
     person_votes = ActionVote.objects.filter(person=person).order_by("-action__date")[
         :100
     ]

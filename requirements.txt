@@ -1,5 +1,6 @@
 beautifulsoup4==4.12.2
 Django==5.0
+django-autoslug==1.9.9
 django-health-check==3.17.0
 gunicorn==21.2.0
 html5lib==1.1

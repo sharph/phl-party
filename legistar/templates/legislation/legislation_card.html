@@ -10,7 +10,7 @@
         <div class="sponsors">
             {% for sponsor in item.sponsors.all %}
             <div class="sponsor">
-                <a href="/people/{{sponsor.id}}/">{{sponsor.name}}</a>
+                <a href="/people/{{sponsor.slug}}/">{{sponsor.name}}</a>
             </div>
             {% endfor %}
         </div>

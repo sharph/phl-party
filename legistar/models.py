@@ -1,10 +1,12 @@
 from django.db import models
+from autoslug import AutoSlugField
 
 # Create your models here.
 
 
 class Person(models.Model):
     name = models.CharField(max_length=70)
+    slug = AutoSlugField(populate_from="name", unique=True)
 
     def __repr__(self):
         return f"<Person: {self.name}>"

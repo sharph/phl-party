@@ -25,7 +25,7 @@
                     <legend>Sponsors</legend>
                     <ul>
                         {% for sponsor in legislation.sponsors.all %}
-                        <li><a href="/people/{{sponsor.id}}/">{{sponsor.name}}</a></li>
+                        <li><a href="/people/{{sponsor.slug}}/">{{sponsor.name}}</a></li>
                         {% endfor %}
                     </ul>
                 </fieldset>
@@ -43,7 +43,7 @@
                             <ul>
                                 {% for vote in action.votes.all %}
                                 <li>
-                                    <a href="/people/{{vote.person.id}}/">{{vote.person.name}}</a>:
+                                    <a href="/people/{{vote.person.slug}}/">{{vote.person.name}}</a>:
                                     {{vote.vote}}
                                 </li>
                                 {% endfor %}
