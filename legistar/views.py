@@ -44,11 +44,11 @@ def index(request):
     legislation_active = (
         Legislation.objects.filter(status__in=["ENACTED", "ADOPTED"])
         .exclude(legislation_type="COMMUNICATION")
-        .order_by("-final_action")[:40]
+        .order_by("-final_action")[:100]
     )
     legislation = Legislation.objects.exclude(
         legislation_type="COMMUNICATION"
-    ).order_by("-created")[:20]
+    ).order_by("-created")[:100]
     actions = LegislationAction.objects.exclude(
         legislation__legislation_type="COMMUNICATION"
     ).exclude(
